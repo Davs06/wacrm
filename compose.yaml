@@ -25,7 +25,7 @@ services:
       - "traefik.http.routers.wacrm.rule=Host(`crm.techrocket.site`)"
       - "traefik.http.routers.wacrm.entrypoints=websecure"
       # Assumindo que você tenha um resolver configurado no Traefik chamado 'letsencrypt'
-      - "traefik.http.routers.wacrm.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.wacrm.tls.certresolver=lets-encrypt"
       - "traefik.http.services.wacrm.loadbalancer.server.port=3000"
 
 networks:
