@@ -8,23 +8,28 @@ services:
         - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     container_name: wacrm_prod
     restart: always
-    # O bloco 'environment' garante que as variáveis existam após o build, durante a execução
     environment:
+      # Expostas para o Frontend/Build
       - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
       - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+      - NEXT_PUBLIC_APP_LOCALE=${NEXT_PUBLIC_APP_LOCALE}
+
+      # Exclusivas do Backend (Segurança e Integrações)
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - META_APP_SECRET=${META_APP_SECRET}
+      - META_APP_ID=${META_APP_ID}
+
+      # Configurações do Sistema
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
-      # Se o seu backend precisar de mais variáveis de ambiente (como META_APP_ID, etc),
-      # você deve mapeá-las aqui no mesmo formato:
-      # - OUTRA_VARIAVEL=${OUTRA_VARIAVEL}
     networks:
       - web
     labels:
       - "traefik.enable=true"
-      # Altere para o seu domínio real
       - "traefik.http.routers.wacrm.rule=Host(`crm.techrocket.site`)"
       - "traefik.http.routers.wacrm.entrypoints=websecure"
-      # Assumindo que você tenha um resolver configurado no Traefik chamado 'letsencrypt'
       - "traefik.http.routers.wacrm.tls.certresolver=lets-encrypt"
       - "traefik.http.services.wacrm.loadbalancer.server.port=3000"
 
