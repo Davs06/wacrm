@@ -11,7 +11,7 @@ services:
     env_file:
       - .env.production
     networks:
-      - traefik_proxy
+      - web
     labels:
       - "traefik.enable=true"
       # Altere para o seu domínio real
