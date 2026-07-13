@@ -3,25 +3,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      # args:
-      #   - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
-      #   - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      args:
+        # VALORES FIXOS AQUI: Bypass para o bug do Portainer no momento do build
+        - NEXT_PUBLIC_SUPABASE_URL=https://geutluacdzinowdburmm.supabase.co
+        - NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdldXRsdWFjZHppbm93ZGJ1cm1tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4OTU5NzksImV4cCI6MjA5OTQ3MTk3OX0.Ua-K7udKFQ7T95TK8dv6LJG5_w88YfeW02A66vnbweo
     container_name: wacrm_prod
     restart: always
     environment:
-      # Expostas para o Frontend/Build
       - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
       - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
       - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
       - NEXT_PUBLIC_APP_LOCALE=${NEXT_PUBLIC_APP_LOCALE}
-
-      # Exclusivas do Backend (Segurança e Integrações)
       - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
       - ENCRYPTION_KEY=${ENCRYPTION_KEY}
       - META_APP_SECRET=${META_APP_SECRET}
       - META_APP_ID=${META_APP_ID}
-
-      # Configurações do Sistema
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
     networks:
