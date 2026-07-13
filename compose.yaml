@@ -8,6 +8,15 @@ services:
         - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     container_name: wacrm_prod
     restart: always
+    # O bloco 'environment' garante que as variáveis existam após o build, durante a execução
+    environment:
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      # Se o seu backend precisar de mais variáveis de ambiente (como META_APP_ID, etc),
+      # você deve mapeá-las aqui no mesmo formato:
+      # - OUTRA_VARIAVEL=${OUTRA_VARIAVEL}
     networks:
       - web
     labels:
