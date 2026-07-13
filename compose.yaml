@@ -6,9 +6,21 @@ services:
       args:
         - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
         - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
-    container_name: wacrm_web
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
+    container_name: wacrm_prod
+    restart: always
     env_file:
-      - .env.local
+      - .env.production
+    networks:
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      # Altere para o seu domínio real
+      - "traefik.http.routers.wacrm.rule=Host(`crm.techrocket.site`)"
+      - "traefik.http.routers.wacrm.entrypoints=websecure"
+      # Assumindo que você tenha um resolver configurado no Traefik chamado 'letsencrypt'
+      - "traefik.http.routers.wacrm.tls.certresolver=letsencrypt"
+      - "traefik.http.services.wacrm.loadbalancer.server.port=3000"
+
+networks:
+  web:
+    external: true
