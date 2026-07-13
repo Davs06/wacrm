@@ -8,8 +8,6 @@ services:
         - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     container_name: wacrm_prod
     restart: always
-    env_file:
-      - .env.production
     networks:
       - web
     labels:
