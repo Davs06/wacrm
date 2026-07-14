@@ -23,6 +23,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # ====================================================================
 ENV NEXT_PUBLIC_SUPABASE_URL="https://geutluacdzinowdburmm.supabase.co"
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdldXRsdWFjZHppbm93ZGJ1cm1tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4OTU5NzksImV4cCI6MjA5OTQ3MTk3OX0.Ua-K7udKFQ7T95TK8dv6LJG5_w88YfeW02A66vnbweo"
+# ADICIONE ESTAS DUAS LINHAS:
+ENV NEXT_PUBLIC_SITE_URL="https://crm.techrocket.site"
+ENV NEXT_PUBLIC_APP_LOCALE="en"
 
 RUN npm run build
 
