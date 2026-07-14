@@ -17,11 +17,12 @@ COPY . .
 # Desabilita a telemetria do Next.js
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Recebe as variáveis públicas necessárias para o build do Next.js
-ARG NEXT_PUBLIC_SUPABASE_URL
-ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
-ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
-ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
+# ====================================================================
+# BYPASS PORTAINER BUG: Variáveis fixas diretamente no ENV
+# É 100% seguro deixar chaves NEXT_PUBLIC hardcoded aqui no repositório
+# ====================================================================
+ENV NEXT_PUBLIC_SUPABASE_URL="https://geutluacdzinowdburmm.supabase.co"
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdldXRsdWFjZHppbm93ZGJ1cm1tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4OTU5NzksImV4cCI6MjA5OTQ3MTk3OX0.Ua-K7udKFQ7T95TK8dv6LJG5_w88YfeW02A66vnbweo"
 
 RUN npm run build
 
