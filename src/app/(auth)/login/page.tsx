@@ -1,9 +1,8 @@
 'use client';
 
 import { Suspense, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, Link } from '@/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -17,6 +16,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { MessageSquare, UsersRound } from 'lucide-react';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 // `useSearchParams` opts the component out of static prerendering
 // unless it sits under a Suspense boundary. We split the form into
@@ -158,6 +158,9 @@ function LoginPageInner() {
             </Link>
           </p>
         </CardContent>
+        <div className="flex items-center justify-center pb-4">
+          <LanguageSwitcher />
+        </div>
       </Card>
     </div>
   );

@@ -1,19 +1,14 @@
 import { getRequestConfig } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { locales } from './navigation';
 
-export default getRequestConfig(async () => {
-  // Read the locale from the environment, defaulting to 'en'
-  const locale = process.env.NEXT_PUBLIC_APP_LOCALE || 'en';
-
-  let messages;
-  try {
-    messages = (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    // Fallback to English if the dictionary for the requested locale doesn't exist yet
-    messages = (await import(`../../messages/en.json`)).default;
+export default getRequestConfig(async ({ locale }) => {
+  // Validate that the incoming `locale` parameter is valid
+  if (!locales.includes(locale as any)) {
+    notFound();
   }
 
   return {
-    locale,
-    messages
+    messages: (await import(`../messages/${locale}.json`)).default,
   };
 });
